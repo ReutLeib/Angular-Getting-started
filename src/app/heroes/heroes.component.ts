@@ -12,26 +12,16 @@ import {HeroService} from '../hero.service';
 })
 
 export class HeroesComponent implements OnInit {
+  heroes: Hero[];
  
-    heroes: Hero[];
-    selectedHero: Hero;
+  constructor(private heroService: HeroService) { }
  
-    constructor(private heroService: HeroService) { }
-  
-    ngOnInit() {
-      this.getHeroes();
-    }
-  
-    // we want to get data from external server so we gonna change this method from:
-    // getHereos(): void{
-    //   this.heroes = this.heroService.getHereos();
-    // }
-    // to:
-    getHeroes(): void { 
-      this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
-    }
-  // click event
-   onSelect(hero: Hero): void {
-    this.selectedHero = hero;
+  ngOnInit() {
+    this.getHeroes();
+  }
+ 
+  getHeroes(): void {
+    this.heroService.getHeroes()
+    .subscribe(heroes => this.heroes = heroes);
   }
 }
